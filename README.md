@@ -1,3 +1,36 @@
+SYSTEM VISION
+Design and implement a distributed, modular, low-latency, event-driven trading platform where each functional capability runs as an independent Node.js service, communicating through WebSockets + durable event logs, deployable across multiple personal laptops, with full replayability, deterministic backtesting, safe ML integration, and centralized UI control. The system must be robust against crashes, restarts, partial failures, data loss, and logic errors, while remaining simple enough to operate without cloud infrastructure, Kafka, or heavy databases.
+
+GLOBAL NON-NEGOTIABLE ARCHITECTURAL PRINCIPLES
+Every module runs as an independent Node.js process
+
+
+All inter-module communication is event-driven
+
+
+WebSockets = transport, Durable Event Logs = source of truth
+
+
+No shared memory, no direct module calls
+
+
+Every event is immutable, schema-validated, append-only
+
+
+Any module can crash and recover via replay
+
+
+Live trading, backtesting, replay use the same code paths
+
+
+ML is advisory only, never executes trades directly
+
+
+Capital protection is centralized and non-bypassable
+
+
+Everything is observable and controllable from a single UI
+
 # Phase-Wise Detailed Technical Execution Plan  
 **Distributed, Event-Driven Trading Platform**
 
