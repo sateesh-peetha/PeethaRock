@@ -1,35 +1,25 @@
-SYSTEM VISION
-Design and implement a distributed, modular, low-latency, event-driven trading platform where each functional capability runs as an independent Node.js service, communicating through WebSockets + durable event logs, deployable across multiple personal laptops, with full replayability, deterministic backtesting, safe ML integration, and centralized UI control. The system must be robust against crashes, restarts, partial failures, data loss, and logic errors, while remaining simple enough to operate without cloud infrastructure, Kafka, or heavy databases.
+## SYSTEM VISION
 
-GLOBAL NON-NEGOTIABLE ARCHITECTURAL PRINCIPLES
-Every module runs as an independent Node.js process
+Design and implement a **distributed, modular, low-latency, event-driven trading platform** where each functional capability runs as an **independent Node.js service**, communicating through **WebSockets (real-time transport)** and **durable event logs (source of truth)**.  
+The platform is deployable across **multiple personal laptops**, supports **full replayability**, **deterministic backtesting**, **safe machine learning integration**, and a **centralized control-plane UI**.
 
+The system must be **robust against crashes, restarts, partial failures, data loss, and logic errors**, while remaining **simple enough to operate without cloud infrastructure, Kafka, or heavy databases**.
 
-All inter-module communication is event-driven
+---
 
+## GLOBAL NON-NEGOTIABLE ARCHITECTURAL PRINCIPLES
 
-WebSockets = transport, Durable Event Logs = source of truth
+- Every module runs as an **independent Node.js process**
+- All inter-module communication is **event-driven**
+- **WebSockets = transport**, **Durable Event Logs = source of truth**
+- No shared memory and **no direct module-to-module calls**
+- Every event is **immutable, schema-validated, and append-only**
+- Any module may crash and **fully recover via replay**
+- **Live trading, backtesting, and replay share the same code paths**
+- Machine learning is **advisory only** and **never executes trades directly**
+- Capital protection is **centralized and non-bypassable**
+- The entire system is **observable and controllable from a single UI**
 
-
-No shared memory, no direct module calls
-
-
-Every event is immutable, schema-validated, append-only
-
-
-Any module can crash and recover via replay
-
-
-Live trading, backtesting, replay use the same code paths
-
-
-ML is advisory only, never executes trades directly
-
-
-Capital protection is centralized and non-bypassable
-
-
-Everything is observable and controllable from a single UI
 
 # Phase-Wise Detailed Technical Execution Plan  
 **Distributed, Event-Driven Trading Platform**
